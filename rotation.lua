@@ -149,6 +149,8 @@ ProbablyEngine.rotation.register_custom(269, "modWW",
       { "116740", "player.buff(146308).duration >= 10" },
       --Haromm's Talisman Proc
       { "116740", "player.buff(148904).duration >= 5" },
+      --Heroic Haromm's Talisman Proc
+      { "116740", "player.buff(148903).duration >= 5" },
       --Sigil of Rampage Proc
       { "116740", "player.buff(148895).duration >= 5" },
       --Ticking Ebon Detonator
@@ -240,6 +242,7 @@ ProbablyEngine.rotation.register_custom(269, "modWW",
       "!player.buff(20217).any",
       "!player.buff(90363).any"
   }},
+  { "115072", "player.health < 100" }, -- Expel Harm when not at full health
   { "115072", "toggle.chistacker" } -- Expel Harm
 }, function()
 ProbablyEngine.toggle.create('chistacker', 'Interface\\Icons\\ability_monk_expelharm', 'Stack Chi', 'Keep Chi at full even OoC...')
