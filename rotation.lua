@@ -10,7 +10,7 @@ ProbablyEngine.rotation.register_custom(269, "modWW",
   { "pause", "modifier.lshift" },
 
   -- Keyboard modifiers
-  { "115460", "modifier.rshift", "ground" },  -- Healing Sphere
+  { "115460", "modifier.lcontrol", "ground" },  -- Healing Sphere
   { "119381", "modifier.ralt" },              -- Leg Sweep
   { "122470", "modifier.lalt" },              -- Touch of Karma
 
@@ -81,8 +81,7 @@ ProbablyEngine.rotation.register_custom(269, "modWW",
     { "123904" }, -- Invoke Xuen, the White Tiger
     {{
        { "#gloves" },
-       -- TODO: This doesn't actually get used when under heroism - need to investigate
-       { "#76089", "@modWW.usePot()" }, -- Virmen's Bite whenever we are in heroism/bloodlust
+       --{ "#76089", "player.hashero" }, -- Virmen's Bite whenever we are in heroism/bloodlust
        -- TODO: G91 Landshark causes a lot of things to break - avoid using it until we can figure out how to fix it
        --{ "#77589", "@modWW.Landshark()" }, -- G91 Landshark
     }, "toggle.useItem" },

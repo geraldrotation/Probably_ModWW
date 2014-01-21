@@ -118,16 +118,6 @@ function modWW.fillBlackout()
   
 end
 
--- Doesn't seem to work
-function modWW.usePot()
-  if (UnitBuff("player", 2825) or
-    UnitBuff("player", 32182) or 
-    UnitBuff("player", 80353) or
-    UnitBuff("player", 90355)) then
-    return true
-  end
-    return false
-end
 
 function modWW.immuneEvents(unit)
   if not UnitAffectingCombat(unit) then return false end
@@ -185,32 +175,6 @@ function modWW.checkShark(target)
     if modWW.items[77589].exp ~= 0 and
       modWW.items[77589].exp < GetTime() then return true end
   end
-end
-
--- Virmen's Bite Potion - this never actually works
-function modWW.VirmensBitePotion()
-        if not (UnitBuff("player", 2825) or
-                        UnitBuff("player", 32182) or
-                        UnitBuff("player", 80353) or
-                        UnitBuff("player", 90355)) then
-                return false
-        end
-        if GetItemCount(76089) < 1 then return false end
-        if GetItemCooldown(76089) ~= 0 then return false end
-        return true
-end
-
--- Master Healing Potion - probably deprecated
-function modWW.MasterHealingPotion()
-        if not (UnitBuff("player", 2825) or
-                        UnitBuff("player", 32182) or
-                        UnitBuff("player", 80353) or
-                        UnitBuff("player", 90355)) then
-                return false
-        end
-        if GetItemCount(76097) < 1 then return false end
-        if GetItemCooldown(76097) ~= 0 then return false end
-        return true
 end
 
 -- G91 Landshark - probably deprecated or not working correctly
