@@ -61,14 +61,15 @@ ProbablyEngine.rotation.register_custom(269, "modWW",
       "!player.buff(90363).any"
   }},
   -- Queued Spells
-  { "119381", "@modWW.checkQueue(119381)" }, -- Leg Sweep
-  { "122470", "@modWW.checkQueue(122470)" }, -- Touch of Karma
-  { "117368", "@modWW.checkQueue(117368)" }, -- Grapple Weapon
-  { "122783", "@modWW.checkQueue(122783)" }, -- Diffuse Magic
-  { "122278", "@modWW.checkQueue(122278)" }, -- Dampen Harm
-  { "116844", "@modWW.checkQueue(116844)" }, -- Ring of Peace
-  { "116841", "@modWW.checkQueue(116841)" }, -- Tiger's Lust
-  { "115460", "@modWW.checkQueue(115460)", "ground" }, -- Healing Sphere
+  { "!122470", "@modWW.checkQueue(122470)" }, -- Touch of Karma
+  { "!117368", "@modWW.checkQueue(117368)" }, -- Grapple Weapon
+  { "!116845", "@modWW.checkQueue(116844)" }, -- Ring of Peace
+  { "!119392", "@modWW.checkQueue(119392)" }, -- Charging Ox Wave
+  { "!119381", "@modWW.checkQueue(119381)" }, -- Leg Sweep
+  { "!116841", "@modWW.checkQueue(116841)" }, -- Tiger's Lust
+  { "!122278", "@modWW.checkQueue(122278)" }, -- Dampen Harm
+  { "!122783", "@modWW.checkQueue(122783)" }, -- Diffuse Magic
+  { "!115460", "@modWW.checkQueue(115460)", "ground" }, -- Healing Sphere
 
   -- Cooldowns
   {{

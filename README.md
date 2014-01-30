@@ -15,16 +15,17 @@ Features
   - Ring of Peace (if talent chosen) when SHS is on CD
   - Pandaran racial Quaking Palm (if able to use) when SHS & Ring of Peace are both on CD
   - Paralysis when SHS, Quaking Palm, & Ring of Peace are all on CD
-- Queued Spells (use '/modWW <spellname/spellID>')
-  - Leg Sweep
-  - Touch of Karma
-  - Grapple Weapon
-  - Diffuse Magic
-  - Dampen Harm
-  - Ring of Peace
-  - Tiger's Lust
-  - Healing Sphere
-- Multitarget/AOE mode will only engage AOE abilities when both the multitarget toggle is set and there are at least 3 active enemies - this means that you can generally leave multitarget toggled on and not cast Spinning Crane Kick over and over
+- Queued Spells (use '/modWW <qName (see below)/spellID>')
+  - Touch of Karma (/modWW qKarma)
+  - Grapple Weapon (/modWW qGrapple)
+  - Tiger's Lust (/modWW qLust)
+  - Healing Sphere (/modWW qSphere)
+  - Ring of Peace (/modWW qtFour)
+  - Charging Ox Wave (/modWW qtFour)
+  - Leg Sweep (/modWW qtFour)
+  - Diffuse Magic (/modWW qTfive)
+  - Dampen Harm (/modWW qtFive)
+- Multitarget/AOE mode will only engage AOE abilities when both the multitarget toggle is set and there are at least 4 active enemies - this means that you can generally leave multitarget toggled on and not cast Spinning Crane Kick over and over
 - Support for TigersEye Brew at 10 stacks when certain agility trinkets (AoC/Haromms/Sigil of Rampage/TED/Bad Juju) proc
 - Automatic grapple weapon when the target is disarmable
 - Automatic & smart Storm, Earth, and Fire on mouseover. It will not apply more than 2 clones, will prevent you from castting on your current target, and if you switch to a target with one on, it will cancel the spell. This is on a new toggle. Thanks to Tao for the routine

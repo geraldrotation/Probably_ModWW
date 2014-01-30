@@ -4,55 +4,60 @@ local DSL = ProbablyEngine.dsl.get
 modWW.items = { }
 modWW.flagged = GetTime()
 modWW.unflagged = GetTime()
-modWW.tempNum = 0
 modWW.queueSpell = nil
 modWW.queueTime = 0
 modWW.sefUnits = {}
 modWW.lastSEFCount = 0
 modWW.lastSEFTarget = nil
 
-SLASH_ECAST1 = "/modWW"
-function SlashCmdList.ECAST(msg, editbox)		
-	local command = msg:match("^(.*)$")
-	if command == "Leg Sweep" or command == 119381 then
-		modWW.queueSpell = 119381
-	elseif command == "Touch of Karma" or command == 122470 then
-    modWW.queueSpell = 122470
-  elseif command == "Grapple Weapon" or command == 117368 then
-    modWW.queueSpell = 117368
-  elseif command == "Diffuse Magic" or command == 122783 then
-    modWW.queueSpell = 122783
-  elseif command == "Dampen Harm" or command == 122278 then
-    modWW.queueSpell = 122278
-  elseif command == "Ring of Peace" or command == 116844 then
-    modWW.queueSpell = 116844
-  elseif command == "Tiger's Lust" or command == 116841 then
-    modWW.queueSpell = 116841
-  elseif command == "Healing Sphere" or command == 115460 then
-    modWW.queueSpell = 115460
+
+ProbablyEngine.command.register('modWW', function(msg, box)
+  local command, text = msg:match("^(%S*)%s*(.-)$")
+  if command == "qKarma" or command == 122470 then
+    modWW.queueSpell = 122470 -- Touch of Karma
+  elseif command == "qGrapple" or command == 117368 then
+    modWW.queueSpell = 117368 -- Grapple Weapon
+  elseif command == "qLust" or command == 116841 then
+    modWW.queueSpell = 116841 -- Tiger's Lust
+  elseif command == "qSphere" or command == 115460 then
+    modWW.queueSpell = 115460 -- Healing Sphere
+  elseif command == "qTfour" then
+    if select(2,GetTalentRowSelectionInfo(4)) == 10 then
+        modWW.queueSpell = 116844 -- Ring of Peace
+    elseif select(2,GetTalentRowSelectionInfo(4)) == 11 then
+        modWW.queueSpell = 119392 -- Charging Ox Wave
+    elseif select(2,GetTalentRowSelectionInfo(4)) == 12 then
+        modWW.queueSpell = 119381 -- Leg Sweep
+    end
+  elseif command == "qTfive" then
+    if select(2,GetTalentRowSelectionInfo(5)) == 14 then
+        modWW.queueSpell = 122278 -- Dampen Harm
+    elseif select(2,GetTalentRowSelectionInfo(5)) == 15 then
+        modWW.queueSpell = 122783 -- Diffuse Magic
+    end
   else
     modWW.queueSpell = nil
   end
   if modWW.queueSpell ~= nil then modWW.queueTime = GetTime() end
-end
+end)
 
 modWW.checkQueue = function (spellId)
-  if (GetTime() - modWW.queueTime) > 4 then
-    modWW.queueTime = 0
-    modWW.queueSpell = nil
+    if (GetTime() - modWW.queueTime) > 10 then
+        modWW.queueTime = 0
+        modWW.queueSpell = nil
     return false
-  else
+    else
     if modWW.queueSpell then
-      if modWW.queueSpell == spellId then
-        if ProbablyEngine.parser.lastCast == GetSpellName(spellId) then
-          modWW.queueSpell = nil
-          modWW.queueTime = 0
-        end
+        if modWW.queueSpell == spellId then
+            if ProbablyEngine.parser.lastCast == GetSpellName(spellId) then
+                modWW.queueSpell = nil
+                modWW.queueTime = 0
+            end
         return true
-      end
+        end
     end
-  end
-  return false
+    end
+    return false
 end
 
 modWW.setFlagged = function (self, ...)
