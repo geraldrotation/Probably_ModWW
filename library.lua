@@ -10,30 +10,165 @@ modWW.sefUnits = {}
 modWW.lastSEFCount = 0
 modWW.lastSEFTarget = nil
 
+    local function onUpdate(self,elapsed)
+      if self.time < GetTime() - 2.5 then
+        if self:GetAlpha() == 0 then self:Hide() else self:SetAlpha(self:GetAlpha() - .05) end
+      end
+    end
+    mww = CreateFrame("Frame",nil,ChatFrame1)
+    mww:SetSize(ChatFrame1:GetWidth(),30)
+    mww:Hide()
+    mww:SetScript("OnUpdate",onUpdate)
+    mww:SetPoint("TOPLEFT",0,150)
+    mww.text = mww:CreateFontString(nil,"OVERLAY","MovieSubtitleFont")
+    mww.text:SetAllPoints()
+    mww.texture = mww:CreateTexture()
+    mww.texture:SetAllPoints()
+    mww.texture:SetTexture(0,0,0,.50)
+    mww.time = 0
+    function mww:message(message)
+      self.text:SetText(message)
+      self:SetAlpha(1)
+      self.time = GetTime()
+      self:Show()
+    end
+
+    local function onUpdate(self,elapsed)
+      if self.time < GetTime() - 2.8 then
+        if self:GetAlpha() == 0 then self:Hide() else self:SetAlpha(self:GetAlpha() - .05) end
+      end
+    end
+    mww = CreateFrame("Frame",nil,ChatFrame1)
+    mww:SetSize(ChatFrame1:GetWidth(),30)
+    mww:Hide()
+    mww:SetScript("OnUpdate",onUpdate)
+    mww:SetPoint("TOP",0,0)
+    mww.text = mww:CreateFontString(nil,"OVERLAY","MovieSubtitleFont")
+    mww.text:SetAllPoints()
+    mww.texture = mww:CreateTexture()
+    mww.texture:SetAllPoints()
+    mww.texture:SetTexture(0,0,0,.50)
+    mww.time = 0
+    function mww:message(message)
+      self.text:SetText(message)
+      self:SetAlpha(1)
+      self.time = GetTime()
+      self:Show()
+    end
+
+
 
 ProbablyEngine.command.register('modWW', function(msg, box)
   local command, text = msg:match("^(%S*)%s*(.-)$")
+
+  if command == 'toggle' then
+    if ProbablyEngine.config.read('button_states', 'MasterToggle', false) then
+        ProbablyEngine.buttons.toggle('MasterToggle')
+        mww:message("|cFFB30000modWW off")
+    else
+        ProbablyEngine.buttons.toggle('MasterToggle')
+        mww:message("|cFF00B34AmodWW on")
+    end
+  end
+  if command == 'kick' then
+    if ProbablyEngine.config.read('button_states', 'interrupt', false) then
+      ProbablyEngine.buttons.toggle('interrupt')
+      mww:message("|cFFB30000Interrupts off")
+    else
+      ProbablyEngine.buttons.toggle('interrupt')
+      mww:message("|cFF00B34AInterrupts on")
+    end
+  end
+
+  if command == 'cds' then
+    if ProbablyEngine.config.read('button_states', 'cooldowns', false) then
+      ProbablyEngine.buttons.toggle('cooldowns')
+      mww:message("|cFFB30000Xuen off")
+    else
+      ProbablyEngine.buttons.toggle('cooldowns')
+      mww:message("|cFF00B34AXuen on")
+    end
+  end
+
+  if command == 'aoe' then
+    if ProbablyEngine.config.read('button_states', 'multitarget', false) then
+      ProbablyEngine.buttons.toggle('multitarget')
+      mww:message("|cFFB30000AoE off")
+    else
+      ProbablyEngine.buttons.toggle('multitarget')
+      mww:message("|cFF00B34AAoE on")
+    end
+  end
+
+  if command == 'chistacker' then
+    if ProbablyEngine.config.read('button_states', 'chistacker', false) then
+      ProbablyEngine.buttons.toggle('chistacker')
+      mww:message("|cFFB30000Auto Chi Stacking off")
+    else
+      ProbablyEngine.buttons.toggle('chistacker')
+      mww:message("|cFF00B34AAuto Chi Stacking on")
+    end
+  end
+
+  if command == 'useItem' then
+    if ProbablyEngine.config.read('button_states', 'useItem', false) then
+      ProbablyEngine.buttons.toggle('useItem')
+      mww:message("|cFFB30000Automatic Item Usage off")
+    else
+      ProbablyEngine.buttons.toggle('useItem')
+      mww:message("|cFF00B34AAutomatic Item Usage on")
+    end
+  end
+
+  if command == 'autosef' then
+    if ProbablyEngine.config.read('button_states', 'autosef', false) then
+      ProbablyEngine.buttons.toggle('autosef')
+      mww:message("|cFFB30000Automatic SE&F Mouseover off")
+    else
+      ProbablyEngine.buttons.toggle('autosef')
+      mww:message("|cFF00B34AAutomatic SE&F Mouseover on")
+    end
+  end
+
+  if command == 'macros' then
+    modWW.createAllMacros()
+  end
+
+  if command == 'help' then
+    modWW.macroHelp()
+  end
+
+
   if command == "qKarma" or command == 122470 then
     modWW.queueSpell = 122470 -- Touch of Karma
+    mww.message("Touch of Karma queued")
   elseif command == "qGrapple" or command == 117368 then
     modWW.queueSpell = 117368 -- Grapple Weapon
+    mww.message("Grapple Weapon queued")
   elseif command == "qLust" or command == 116841 then
     modWW.queueSpell = 116841 -- Tiger's Lust
+    mww.message("Tger's Lust queued")
   elseif command == "qSphere" or command == 115460 then
     modWW.queueSpell = 115460 -- Healing Sphere
+    mww.message("Healing Sphere queued")
   elseif command == "qTfour" then
     if select(2,GetTalentRowSelectionInfo(4)) == 10 then
         modWW.queueSpell = 116844 -- Ring of Peace
+        mww.message("Ring of Peace queued")
     elseif select(2,GetTalentRowSelectionInfo(4)) == 11 then
         modWW.queueSpell = 119392 -- Charging Ox Wave
+        mww.message("Charging Ox Wave queued")
     elseif select(2,GetTalentRowSelectionInfo(4)) == 12 then
         modWW.queueSpell = 119381 -- Leg Sweep
+        mww.message("Leg Sweep queued")
     end
   elseif command == "qTfive" then
     if select(2,GetTalentRowSelectionInfo(5)) == 14 then
         modWW.queueSpell = 122278 -- Dampen Harm
+        mww.message("Dampen Harm queued")
     elseif select(2,GetTalentRowSelectionInfo(5)) == 15 then
         modWW.queueSpell = 122783 -- Diffuse Magic
+        mww.message("Diffuse Magic queued")
     end
   else
     modWW.queueSpell = nil
@@ -59,6 +194,37 @@ modWW.checkQueue = function (spellId)
     end
     return false
 end
+
+function modWW.createAllMacros( ... )
+  local usedslots = select(2,GetNumMacros())
+  if usedslots <= 12 then
+    CreateMacro("kick", "INV_MISC_QUESTIONMARK", "#showtooltip Spear Hand Strike\n/modWW kick", 1, 1)
+    CreateMacro("cds", "INV_MISC_QUESTIONMARK", "#showtooltip Invoke Xuen, the White Tiger\n/modWW cds", 1, 1)
+    CreateMacro("aoe", "Ability_warlock_jinx", "/modWW aoe", 1, 1)
+    CreateMacro("chistacker", "INV_MISC_QUESTIONMARK", "#showtooltip Expel Harm\n/modWW cds", 1, 1)
+    CreateMacro("useItem", "Spell_Magic_PolymorphRabbit", "/modWW useItem", 1, 1)
+    CreateMacro("autosef", "INV_MISC_QUESTIONMARK", "#showtooltip Storm, Earth, and Fire\n/modWW autosef", 1, 1)
+    CreateMacro("qKarma", "INV_MISC_QUESTIONMARK", "#showtooltip Touch of Karma\n/modWW qKarma", 1, 1)
+    CreateMacro("qGrapple", "INV_MISC_QUESTIONMARK", "#showtooltip Grapple Weapon\n/modWW qGrapple", 1, 1)
+    CreateMacro("qLust", "INV_MISC_QUESTIONMARK", "#showtooltip Tiger's Lust\n/modWW qLust", 1, 1)
+    CreateMacro("qSphere", "INV_MISC_QUESTIONMARK", "#showtooltip Healing Sphere\n/modWW qSphere", 1, 1)
+    CreateMacro("qTfour", "ability_parry", "/modWW qTfour", 1, 1)
+    CreateMacro("qTfive", "ability_parry", "/modWW qTfive", 1, 1)
+  else
+    print("You don't have enough free Macroslots")
+  end
+end
+-----------------------------------------------------------------------------------------------------------------------------
+-- Create Help Message ------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
+function modWW.macroHelp( ... )
+  print("|cFF32ff84ModWW")
+  print("|cFF32ff84Commands:|r\n/modWW macros - Create all Toggle / Spellqueue Macros")
+  print("|cFF32ff84Toggle Macros:|r\n/modWW toggle - Rotation on/off\n/modWW kick - Interrupt & Disarm on/off\n/modWW cds - Xuen on/off\n/modWW aoe - Multitarget-Rotation on/off\n/modWW chistacker - Chi Stacking on/off\n/modWW useItem - Auto item usage on/off\n/modWW autosef - Auto mouseover SE&F on/off")
+  print("|cFF32ff84Queue Macros:|r\n/modWW qKarma | qGrapple | qLust | qSphere | qTfour | qTfive")
+end
+
+
 
 modWW.setFlagged = function (self, ...)
   modWW.flagged = GetTime()
